@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Edit Assignment</h2>
+
+
+<form method="POST">
+
+    {{ form.hidden_tag() }}
+
+
+    <div class="mb-3">
+        {{ form.title.label }}
+
+        {{ form.title(class="form-control") }}
+    </div>
+
+
+    <div class="mb-3">
+        {{ form.course.label }}
+
+        {{ form.course(class="form-control") }}
+    </div>
+
+
+    <div class="mb-3">
+        {{ form.deadline.label }}
+
+        {{ form.deadline(class="form-control") }}
+    </div>
+    <div class="mb-3">{{ form.status.label}}
+
+        {{ form.status(class="form-control") }}
+    </div>
+
+
+    <div>
+        {{ form.submit(class="btn btn-warning") }}
+    </div>
+
+
+</form>
+
+
+{% endblock %}

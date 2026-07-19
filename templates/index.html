@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="text-center mb-3">
+    My Assignments
+</h1>
+<div class="row mb-3">
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Total Assignments</h5>
+                <h2>{{ total }}</h2>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Pending</h5>
+                <h2>{{ pending }}</h2>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Completed</h5>
+                <h2>{{ completed }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+    <div class="card text-center">
+        <div class="card-body">
+            <h5>Overdue</h5>
+            <h2>{{ overdue }}</h2>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+<div class="md-3">
+    <a href="{{ url_for('add_assignment') }}" class="btn btn-primary">
+        Add New Assignment
+    </a>
+</div>
+
+
+{% for assignment in assignments %}
+
+<div class="card mb-3">
+
+    <div class="card-body">
+
+        <h5>
+            {{ assignment.title }}
+        </h5>
+
+        <p>
+            Course: {{ assignment.course }}
+        </p>
+        <p>
+    Status:
+
+    {% if assignment.status == "Completed" %}
+
+        <span class="badge bg-success">
+            Completed
+        </span>
+
+    {% elif assignment.status == "Overdue" %}
+
+        <span class="badge bg-danger">
+            Overdue
+        </span>
+
+    {% else %}
+
+        <span class="badge bg-warning text-dark">
+            Pending
+        </span>
+
+    {% endif %}
+
+</p>
+
+        <p>
+            <p>
+    Deadline:
+    {{ assignment.deadline.strftime('%d %B %Y') }}
+</p>
+
+<p>
+    <a href="{{ url_for('complete_assignment', id=assignment.id) }}"
+       class="btn btn-success btn-sm">
+        ✔ Mark Completed
+    </a>
+
+    <a href="{{ url_for('edit_assignment', id=assignment.id) }}" 
+       class="btn btn-warning">
+        Edit
+    </a>
+
+    <a href="{{ url_for('delete_assignment', id=assignment.id) }}" 
+       class="btn btn-danger">
+        Delete
+    </a>
+</p>
+</a>
+        </p>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
